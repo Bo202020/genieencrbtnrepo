@@ -8,25 +8,88 @@
 }
 
 body {
-  background: #2d2d2d;
+  background: #000000;
   color: white;
   padding: 5px;
   font-family: "Inconsolata", monospace;
   font-weight: 300;
   letter-spacing: 3px;
-  overflow: hidden;
+  /* overflow: hidden; */
+  scrollbar-width: 0;
 }
-
-#textarea {
+body::-webkit-scrollbar {
+  display: none;
+}
+body::selection {
+  color: rgb(117, 117, 0);
+  background: rgb(255, 255, 0);
+}
+#eTextarea {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 50%);
   resize: none;
   min-width: 15%;
+  border: 2px solid yellow;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 20px;
+  padding: 10px;
+  scrollbar-width: 0;
+  background: black;
+  color: white;
 }
-#textinputs {
+#eTextarea:focus {
+  border: yellow 2px solid;
+  outline: none;
+}
+#eTextarea::-webkit-scrollbar {
+  display: none;
+}
+#radiobuttons {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: monospace;
+  font-size: 20px;
+}
+#decrypt,
+#encrypt {
+  margin: 20px;
+  border: 2px solid yellow;
+}
+#fencrypt,
+#fdecrypt {
+  margin: 0 20px 0 0;
+}
+#ePassword {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid yellow;
+  border-radius: 5px;
+  padding: 5px;
+  height: 50px;
+  width: 500px;
+  text-align: center;
+  font-family: monospace;
+  font-size: 20px;
+  background: black;
+  color: white;
+}
+#ePassword:focus {
+  border: yellow 2px solid;
+  outline: none;
+}
+#eTextinputs {
   position: absolute;
   top: 50%;
   left: 50%;
   height: 70%;
-  width: 50%;
+  width: 45%;
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
@@ -34,15 +97,107 @@ body {
   border: rgb(255, 255, 255) 2px solid;
   border-radius: 50px;
   overflow: hidden;
-  background: #2d2d2d;
+  background: #000000;
   padding: 10px;
 }
-#msg {
+
+#eCopy1 {
+  position: absolute;
+  top: 91%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border: 2px solid yellow;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 20px;
+  padding: 5px 10px;
+  transition: 0.2s;
+  background: yellow;
+}
+#eCopy1:hover {
+  transform: translate(-50%, 0) scale(1.1);
+}
+#eCopy1:active {
+  background: black;
+  color: white;
+  transform: translate(-50%, 0) scale(1);
+}
+#eCryptOption {
+  display: none;
+}
+#eWrapper {
+  display: border-box;
+  position: absolute;
+  top: 15%;
+  left: 7.25%;
+  transform: translate(-50%, -50%);
+  height: 30px;
+  width: 30px;
+  border: 2px yellow solid !important;
+  border-radius: 2px;
+  transition: 1s;
+  background: yellow !important;
+}
+.eCrypting {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 40px;
+  width: 90%;
+  border: solid 2px white;
+  border-radius: 5px;
+}
+#EEn {
+  position: absolute;
+  top: 7.5%;
+  left: 85%;
+  font-family: monospace;
+  font-size: 15px;
+}
+#EDe {
+  position: absolute;
+  top: 7.5%;
+  left: 6.5%;
+  font-family: monospace;
+  font-size: 15px;
+}
+p {
   position: absolute;
   top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-size: 15px;
+}
+.eCopy2 {
+  position: absolute;
+  top: 41.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  border: 2px solid yellow;
+  padding: 5px 10px;
+  background: yellow;
+  border-radius: 5px;
+  color: black;
+  font-family: monospace;
+  font-size: 20px;
+  letter-spacing: 1px;
+  transition: 0.2s;
+}
+.eCopy2:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.eCopy2:active {
+  transform: translate(-50%, -50%) scale(1);
+  color: white;
+  background: transparent;
+}
+#top {
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   /* border: 2px solid red; */
-  text-align: center;
-  padding: 10px;
+  z-index: 10;
 }

@@ -24,7 +24,10 @@ const encrypt = (text, password) => {
   // Encrypts and returns encrypted text.
   let encrypted = cipher.update(text, "utf8", "hex");
   encrypted += cipher.final("hex");
-  return `${iv.toString("hex")}:${encrypted}`;
+  return {
+    iv: iv.toString("hex"),
+    encrypted,
+  }; //`${iv.toString("hex")}:${encrypted}`;
 };
 
 const decrypt = (text, password) => {
@@ -37,7 +40,9 @@ const decrypt = (text, password) => {
   // Decrypts and returns decrypted text.
   let decrypted = decipher.update(encodedText, "hex", "utf8");
   decrypted += decipher.final("utf8");
-  return decrypted;
+  return {
+    decrypted,
+  };
 };
 
 //Express POST handler
@@ -59,7 +64,7 @@ app.post("/crypt", (req, res) => {
       return res.send({ decrypted });
     }
   } catch (e) {
-    return res.send({ ecnrypted: "Invalid Key." });
+    return res.send({ msg: "stop fucking around!!!" });
   }
 });
 

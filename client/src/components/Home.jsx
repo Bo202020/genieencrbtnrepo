@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
+      <h1 class="hTitle">WASSUP</h1>
       <nav className="navbar">
         <ul className="nav">
           <li>
@@ -23,7 +24,6 @@ const Home = () => {
           </li>
         </ul>
       </nav>
-      <h1>WASSUP</h1>
       <h2>This is the Home page.</h2>
     </>
   );
