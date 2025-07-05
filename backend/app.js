@@ -2,6 +2,8 @@
 const crypto = require("crypto");
 const express = require("express");
 const cors = require("cors");
+const mongoose = require("mongoose");
+const Chat = require("./chatSchema.js");
 // Setting up neccessary variables for Encryption/Decryption.
 const algorithm = "aes-256-cbc";
 const deriveKey = (password) => crypto.scryptSync(password, "salt", 32);
@@ -14,6 +16,13 @@ app.use(
     extended: true,
   })
 );
+mongoose
+  .connect("mongodb://localhost:27017/chatSave", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(console.log("connected to mongo"))
+  .catch((e) => console.error(e));
 // Encryption/Decryption functions.
 const encrypt = (text, password) => {
   // Gets password and generates and IV.
@@ -68,4 +77,10 @@ app.post("/crypt", (req, res) => {
   }
 });
 
+app.post("/create-chat", (req, res) => {
+  if (!req.body.name) return res.send({ msg: "No Name!" });
+  if (!req.body.time) return res.send({ msg: "No Time!" });
+  if (!req.body.masterIP) return res.send({ msg: "No Ip for Master!" });
+  res.send({ mssg: "added chat to saved chats." });
+});
 app.listen(3001, () => console.log("Up on 3001"));

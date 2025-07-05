@@ -1,6 +1,7 @@
 // imports
 import React, { useState } from "react";
 import { useRef } from "react";
+import "./styles.css";
 // The actual page: Encryption
 const Encryption = () => {
   //setting up essential useState variables
@@ -80,22 +81,35 @@ const Encryption = () => {
         crypt: "encrypt",
       }));
       document.getElementById("eWrapper").style.position = "absolute";
-      document.getElementById("eWrapper").style.top = "15%";
-      document.getElementById("eWrapper").style.left = "92.75%";
+      document.getElementById("eWrapper").style.top = "50%";
+      document.getElementById("eWrapper").style.left = "85%";
     } else {
       setFetchData((prev) => ({
         ...prev,
         crypt: "decrypt",
       }));
       document.getElementById("eWrapper").style.position = "absolute";
-      document.getElementById("eWrapper").style.top = "15%";
-      document.getElementById("eWrapper").style.left = "7.25%";
+      document.getElementById("eWrapper").style.top = "50%";
+      document.getElementById("eWrapper").style.left = "15%";
     }
     // Uses spread operator to overwrite crypt when radio changes.
     // setFetchData({
     //   ...fetchData,
     //   crypt: e.target.checked ? "encrypt" : "decrypt",
     // });
+    const een = document.getElementById("EEn");
+    const ede = document.getElementById("EDe");
+    if (e.target.checked) {
+      een.style.position = "absolute";
+      een.style.top = "50%";
+      ede.style.position = "absolute";
+      ede.style.top = "130%";
+    } else {
+      een.style.position = "absolute";
+      een.style.top = "130%";
+      ede.style.position = "absolute";
+      ede.style.top = "50%";
+    }
   };
   const handlePasswordChange = (e) => {
     setFetchData({ ...fetchData, password: e.target.value });
@@ -109,13 +123,46 @@ const Encryption = () => {
     targetP.setSelectionRange(0, 99999);
     targetE.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(
-      `Password: ${targetP.value}, Encrypted: ${targetE.value}`
+      `Password: ${targetP.value}, Encrypted: ${targetE.value}, valid.`
     );
+  };
+  const handlePaste = async (e) => {
+    const re = /valid/gim;
+    let data = await navigator.clipboard.readText();
+    if (
+      data === undefined ||
+      data === null ||
+      data === NaN ||
+      data === "" ||
+      data === false
+    ) {
+      return;
+    }
+    if (data.match(re) !== undefined) {
+      data = data.replace(/password:|encrypted|,|valid.|\s+/gim, "").trim();
+    }
+
+    data = [...data.split(":")];
+
+    data = [data[0], `${data[1]}:${data[2]}`];
+
+    document.getElementById("ePassword").value = data[0];
+    document.getElementById("eTextarea").value = data[1];
+    document.getElementById("eCryptOption").checked = false;
+
+    handleRadioChange({ target: { checked: false } });
+
+    setFetchData((prev) => ({
+      ...prev,
+      crypt: "decrypt",
+      password: data[0],
+      text: data[1],
+    }));
   };
   return (
     // Actuall JSX (fancy HTML) for page.
     <>
-      <h1 class="eTitle">WASSUP</h1>
+      <h1 class="eTitle">WASSUP!!!</h1>
       <h2 class="eSubTitle">This is the encryption page: AES 256</h2>
       <form
         action="http://localhost:3001/crypt"
@@ -124,16 +171,17 @@ const Encryption = () => {
       >
         <p id="top">Switch between Encrypt and Decrypt text!</p>
         <div id="eTextinputs">
-          <span id="EEn">Encrypt</span>
-          <span id="EDe">Decrypt</span>
-          <label for="eCryptOption" class="eCrypting"></label>
-          <div id="eWrapper" onClick={handleRadioChange}>
-            <input
-              type="checkbox"
-              id="eCryptOption"
-              onChange={handleRadioChange}
-            />
-          </div>
+          <label for="eCryptOption" class="eCrypting">
+            <span id="EEn">Encrypt</span>
+            <span id="EDe">Decrypt</span>
+            <div id="eWrapper" onClick={handleRadioChange}>
+              <input
+                type="checkbox"
+                id="eCryptOption"
+                onChange={handleRadioChange}
+              />
+            </div>
+          </label>
 
           <input
             type="text"
@@ -147,6 +195,10 @@ const Encryption = () => {
           />
           <a class="eCopy2" onClick={handleCopy}>
             Copy Encrypted & Password
+          </a>
+          <a class="eCopy3" onClick={handlePaste}>
+            {" "}
+            Paste Formatted
           </a>
           <textarea
             placeholder="Text to Encrypt"

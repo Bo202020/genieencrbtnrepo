@@ -1,5 +1,5 @@
-import React from "react";
-import "./styles.css";
+import React, { MenuItem } from "react";
+import "./styles2.css";
 import { Link } from "react-router-dom";
 const Home = () => {
   return (
@@ -8,19 +8,29 @@ const Home = () => {
       <nav className="navbar">
         <ul className="nav">
           <li>
-            <Link to="/crypt">Cryption</Link>
+            <Link to="/crypt">
+              <span class="white">Cryption</span>
+            </Link>
           </li>
           <li>
-            <Link to="/buttons">Buttons</Link>
+            <Link to="/chat">
+              <span class="white underno">One Time Chat</span>
+            </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about">
+              <span class="white">About</span>
+            </Link>
           </li>
           <li>
-            <Link to="/contacts">Contacts</Link>
+            <Link to="/contacts">
+              <span class="white">Contacts</span>
+            </Link>
           </li>
           <li>
-            <Link to="/help">Help</Link>
+            <Link to="/help">
+              <span class="white">Help</span>
+            </Link>
           </li>
         </ul>
       </nav>
