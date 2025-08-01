@@ -2,27 +2,29 @@
 const crypto = require("crypto");
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
-const Chat = require("./chatSchema.js");
+const helmet = require("helmet");
+require("dotenv").config();
+
 // Setting up neccessary variables for Encryption/Decryption.
 const algorithm = "aes-256-cbc";
 const deriveKey = (password) => crypto.scryptSync(password, "salt", 32);
 // Sets up Express.
 const app = express();
+const path = require("path");
+
+// Serve React static files
+
+// Catch-all route to React index.html
+
 app.use(cors());
+app.use(helmet());
 app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
-mongoose
-  .connect("mongodb://localhost:27017/chatSave", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(console.log("connected to mongo"))
-  .catch((e) => console.error(e));
+
 // Encryption/Decryption functions.
 const encrypt = (text, password) => {
   // Gets password and generates and IV.
@@ -77,10 +79,8 @@ app.post("/crypt", (req, res) => {
   }
 });
 
-app.post("/create-chat", (req, res) => {
-  if (!req.body.name) return res.send({ msg: "No Name!" });
-  if (!req.body.time) return res.send({ msg: "No Time!" });
-  if (!req.body.masterIP) return res.send({ msg: "No Ip for Master!" });
-  res.send({ mssg: "added chat to saved chats." });
+app.use(express.static(path.join(__dirname, "../client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
-app.listen(3001, () => console.log("Up on 3001"));
+app.listen(process.env.PORT || 3001, () => console.log("Up on 3001"));
