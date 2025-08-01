@@ -8,9 +8,9 @@ const About = () => {
       <h2>This is the About page!</h2>
 
       <h3>
-        This Website was developed, and programmed by Bogdan Arvatu, over a
-        period of 2 months, the ideas were inspired and created by Daniel Arvatu
-        who helped me with the accounts and the idea itself.
+        This Website was developed, and programmed by Bogdan A, over a period of
+        2 months, the ideas were inspired and created by Daniel A who helped me
+        with the accounts and the idea itself.
       </h3>
 
       <ul class="ul">

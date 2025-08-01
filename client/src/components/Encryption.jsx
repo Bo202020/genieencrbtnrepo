@@ -1,9 +1,10 @@
 // imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRef } from "react";
 import "./styles.css";
 // The actual page: Encryption
 const Encryption = () => {
+  useEffect(() => {}, []);
   //setting up essential useState variables
   const [fetchData, setFetchData] = useState({
     crypt: "",
