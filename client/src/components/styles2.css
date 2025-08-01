@@ -27,7 +27,19 @@ body::selection {
 .white {
   color: yellow;
   font-size: 20px;
+  margin: 20px;
 }
-li {
-  color: yellow;
+
+h3 {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.ul {
+  position: absolute;
+  top: 40%;
+  left: 15%;
+  transform: translate(-50%, -50%);
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles2.css";
 
-const Chat = () => {
+const Contact = () => {
   return (
     <>
       <h1>WASSUP!!!</h1>
@@ -10,4 +10,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default Contact;

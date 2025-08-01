@@ -21,7 +21,7 @@ const Encryption = () => {
     e.preventDefault();
     // Mannually submitting through POST
     try {
-      const res = await fetch("http://localhost:3001/crypt", {
+      const res = await fetch("/crypt", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -164,11 +164,7 @@ const Encryption = () => {
     <>
       <h1 class="eTitle">WASSUP!!!</h1>
       <h2 class="eSubTitle">This is the encryption page: AES 256</h2>
-      <form
-        action="http://localhost:3001/crypt"
-        method="POST"
-        onSubmit={handleSubmit}
-      >
+      <form action="/crypt" method="POST" onSubmit={handleSubmit}>
         <p id="top">Switch between Encrypt and Decrypt text!</p>
         <div id="eTextinputs">
           <label for="eCryptOption" class="eCrypting">
