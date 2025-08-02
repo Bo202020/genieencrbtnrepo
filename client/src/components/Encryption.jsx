@@ -1,10 +1,20 @@
 // imports
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useRef } from "react";
 import "./styles.css";
 // The actual page: Encryption
 const Encryption = () => {
-  useEffect(() => {}, []);
+  const getWindowSize = () => {
+    const windowH = window.innerHeight;
+    const windowW = window.innerWidth;
+
+    return {
+      height: windowH,
+      width: windowW,
+    };
+  };
+  const navigate = useNavigate();
   //setting up essential useState variables
   const [fetchData, setFetchData] = useState({
     crypt: "",
@@ -16,6 +26,8 @@ const Encryption = () => {
   const [colsConst, setColsConst] = useState(60);
   const iterationsRef = useRef(0);
   const intervalRef = useRef(null);
+  let winSize = getWindowSize();
+  // alert(winSize);
   //functions that handle submits and changes on page.
   const handleSubmit = async (e) => {
     //Stops reload and submit.
@@ -160,6 +172,16 @@ const Encryption = () => {
       text: data[1],
     }));
   };
+  window.addEventListener("resize", () => {
+    winSize = getWindowSize();
+    // alert(winSize);
+  });
+
+  setInterval(() => {
+    if (winSize.height < 636 || winSize.width < 1094) {
+      navigate("/cryptM");
+    }
+  }, 250);
   return (
     // Actuall JSX (fancy HTML) for page.
     <>
